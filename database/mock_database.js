@@ -1,5 +1,5 @@
 
-let database = [
+let mockDatabase = [
     {"id":1,"first_name":"Gwenette","last_name":"Myton","email":"gmyton0@weather.com","gender":"Female","ip_address":"210.2.79.130"},
     {"id":2,"first_name":"Rriocard","last_name":"Saul","email":"rsaul1@wunderground.com","gender":"Male","ip_address":"107.103.236.182"},
     {"id":3,"first_name":"Bettine","last_name":"Savin","email":"bsavin2@va.gov","gender":"Female","ip_address":"129.35.2.207"},
@@ -12,4 +12,6 @@ let database = [
     {"id":10,"first_name":"Erin","last_name":"Jarad","email":"ejarad9@cocolog-nifty.com","gender":"Male","ip_address":"241.178.56.236"},
 ]
 
-export default database
+export {
+    mockDatabase
+}

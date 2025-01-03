@@ -26,7 +26,7 @@ appRouter.get("/get-all-users", getAllUsersAPI);
 appRouter.get("/get-user", getUserAPI); // Example for using params
 appRouter.get('/filtered-users'); // Example for using query
 appRouter.put("/edit-user", editUserAPI); 
-appRouter.delete("/delete-user", deleteUserAPI);
+appRouter.delete("/delete-user/:id", deleteUserAPI);
 
 // Middleware examples
 // appRouter.use(routerUseMiddleware);
