@@ -1,13 +1,13 @@
 import express from "express";
-// import bodyParser from "body-parser";
+import bodyParser from "body-parser";
 // import { configDotenv } from "dotenv";
-import appRouter from "./server/router.js";  ``
+import appRouter from "./server/router.js";
 
 const PORT = 3001;
 
 const app = express();
 
-// app.use(bodyParser.json())
+app.use(bodyParser.json())
 
 // await setupSQLDatabase();
 
