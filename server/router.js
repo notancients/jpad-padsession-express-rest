@@ -1,8 +1,9 @@
 import express from "express";
-import { createUserAPI, getAllUsersAPI } from "../user/user_controller.js";
-import { modifyBody } from "./middleware.js";
+import { createUserAPI, deleteUserAPI, editUserAPI, getAllUsersAPI, getUserAPI } from "../user/user_controller.js";
+import { routerUseMiddleware, missingNextMiddleware, modifyBody, printAMiddleware, printBMiddleware, specificPathMiddlware } from "./middleware.js";
 
 const appRouter = express.Router()
+
 
 appRouter.get("/", (req, res) => {
     res.send({
@@ -20,12 +21,22 @@ appRouter.get("/full-middleware",
 )
 
 // user
-appRouter.post("/create-user", createUserAPI);
+appRouter.post("/create-user", createUserAPI); // uses req.body
+appRouter.get("/get-all-users", getAllUsersAPI); 
+appRouter.get("/get-user", getUserAPI); // Example for using params
+appRouter.get('/filtered-users'); // Example for using query
+appRouter.put("/edit-user", editUserAPI); 
+appRouter.delete("/delete-user", deleteUserAPI);
+
+// Middleware examples
+// appRouter.use(routerUseMiddleware);
 // appRouter.post("/create-user", modifyBody, createUserAPI); // Example with middleware
+// appRouter.get("/two-middleware", printAMiddleware, printBMiddleware, getAllUsersAPI); // Example with multiple middlewares
+// appRouter.get("/missing-next-middleware",  missingNextMiddleware, getAllUsersAPI); // Example with missing next in middleware
 
-appRouter.get("/get-all-users", getAllUsersAPI); // Example with multiple middlewares
-appRouter.get("/get-all-users", getAllUsersAPI); // Example with missing next in middleware
-
-appRouter.get("/get-all-users", getAllUsersAPI);
+// Specific path/subdirectory only middlewares
+appRouter.use('/specific', specificPathMiddlware);
+appRouter.post("/specific/create-user", createUserAPI);
+appRouter.get("/specific/get-all-users", getAllUsersAPI);
 
 export default appRouter;

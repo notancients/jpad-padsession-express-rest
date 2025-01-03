@@ -41,7 +41,7 @@ async function createUserAPI(req, res) {
 }
 
 async function editUserAPI(req, res) {
-    
+
 }
 
 
@@ -49,9 +49,21 @@ async function deleteUserAPI(req, res) {
 
 } 
 
+async function getUserAPI(req, res) {
+
+}
+
+async function filteredGetAPI(req,res) {
+    
+}
+
 export {
     getAllUsersAPI,
-    createUserAPI
+    createUserAPI,
+    getUserAPI,
+    deleteUserAPI,
+    editUserAPI,
+    filteredGetAPI
 }
 
 console.log("")

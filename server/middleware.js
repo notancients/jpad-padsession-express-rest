@@ -27,9 +27,22 @@ function missingNextMiddleware(req, res, next) {
     console.log("This is a middleware where the next function is never called.");
 }
 
+function specificPathMiddlware(req, res, next) {
+    console.log("This is a middleware that will only apply to /specific/* paths.");
+    next();
+}
+
+export function routerUseMiddleware(req, res, next) {
+    console.log("This is a middleware that is going to be used with all routes in the router.");
+    next();
+}
+
+
+
 export {
     modifyBody,
     printAMiddleware,
     printBMiddleware,
-    missingNextMiddleware
+    missingNextMiddleware,
+    specificPathMiddlware
 }
