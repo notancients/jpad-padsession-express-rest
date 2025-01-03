@@ -1,5 +1,5 @@
 import express from "express";
-import { createUserAPI, deleteUserAPI, editUserAPI, getAllUsersAPI, getUserAPI } from "../user/user_controller.js";
+import { createUserAPI, deleteUserAPI, editUserAPI, filteredGetAPI, getAllUsersAPI, getUserAPI } from "../user/user_controller.js";
 import { routerUseMiddleware, missingNextMiddleware, modifyBody, printAMiddleware, printBMiddleware, specificPathMiddlware } from "./middleware.js";
 
 const appRouter = express.Router()
@@ -11,20 +11,21 @@ appRouter.get("/", (req, res) => {
     })
 })
 
-appRouter.get("/full-middleware", 
-    (req, res, next) => {
-        console.log("This is how they look without being separated as a function.");
-    },
-    (req, res) => {
-        res.send("This is the response that the user would actually get when accessing this endpoint.");
-    }
-)
+// appRouter.get("/full-middleware", 
+//     (req, res, next) => {
+//         console.log("This is how they look without being separated as a function.");
+//         next();
+//     },
+//     (req, res) => {
+//         res.send("This is the response that the user would actually get when accessing this endpoint.");
+//     }
+// )
 
 // user
 appRouter.post("/create-user", createUserAPI); // uses req.body
 appRouter.get("/get-all-users", getAllUsersAPI); 
-appRouter.get("/get-user", getUserAPI); // Example for using params
-appRouter.get('/filtered-users'); // Example for using query
+appRouter.get("/get-user/:id", getUserAPI); // Example for using params
+appRouter.get('/filtered-users', filteredGetAPI); // Example for using query
 appRouter.put("/edit-user", editUserAPI); 
 appRouter.delete("/delete-user/:id", deleteUserAPI);
 
@@ -35,8 +36,8 @@ appRouter.delete("/delete-user/:id", deleteUserAPI);
 // appRouter.get("/missing-next-middleware",  missingNextMiddleware, getAllUsersAPI); // Example with missing next in middleware
 
 // Specific path/subdirectory only middlewares
-appRouter.use('/specific', specificPathMiddlware);
-appRouter.post("/specific/create-user", createUserAPI);
-appRouter.get("/specific/get-all-users", getAllUsersAPI);
+// appRouter.use('/specific', specificPathMiddlware);
+// appRouter.post("/specific/create-user", createUserAPI);
+// appRouter.get("/specific/get-all-users", getAllUsersAPI);
 
 export default appRouter;

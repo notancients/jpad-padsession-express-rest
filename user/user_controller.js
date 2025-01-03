@@ -45,7 +45,7 @@ async function createUserAPI(req, res) {
 async function editUserAPI(req, res) {
     console.log("Received an edit user request.");
     try {
-        console.log("This is the new details of the user: ", req.body);
+        // console.log("This is the new details of the user: ", req.body);
         let targetId = req.body.id;
         // For showing an error 
         // database = database.map( (user) => {
@@ -103,7 +103,13 @@ async function getUserAPI(req, res) {
     console.log("Received a get user request.");
 
     try {
-        
+        let targetId = req.params.id;
+        let result = database.filter( user => user.id == targetId);
+        res.status(200).json({
+            "success": true,
+            "message": "Successfully retrieved target user.",
+            "data": result
+        })
     } catch (error) {
         console.log(error)
         res.status(400).json({
@@ -117,7 +123,26 @@ async function filteredGetAPI(req,res) {
     console.log("Received a filtered get request.");
 
     try {
-        
+        let filter = req.query;
+        let filterKeys = Object.keys(filter);
+        console.log(filterKeys.length)
+        console.log(req.query);
+        let result = database.filter((user) => {
+            let truths = 0;
+            filterKeys.forEach((value) => {
+                if (filter[value] == user[value]) {
+                    truths += 1
+                }})
+            console.log(truths, user.first_name, filterKeys.length)
+            if (truths == filterKeys.length) {
+                return user;
+            }
+        })
+        res.status(200).json({
+            "success": true,
+            "message": "Successfully retrieved according to filter.",
+            "data": result
+        })
     } catch (error) {
         console.log(error)
         res.status(400).json({
