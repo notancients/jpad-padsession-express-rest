@@ -1,9 +1,8 @@
 import express from "express";
 // import bodyParser from "body-parser";
 // import { configDotenv } from "dotenv";
-import appRouter from "./server/router.js";  
+import appRouter from "./server/router.js";  ``
 
-configDotenv();
 const PORT = 3001;
 
 const app = express();
