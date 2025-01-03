@@ -40,6 +40,14 @@ async function createUserAPI(req, res) {
     }
 }
 
+async function editUserAPI(req, res) {
+    
+}
+
+
+async function deleteUserAPI(req, res) {
+
+} 
 
 export {
     getAllUsersAPI,
