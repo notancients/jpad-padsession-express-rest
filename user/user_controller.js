@@ -24,6 +24,9 @@ async function createUserAPI(req, res) {
     
     try {
         let { id, first_name, last_name, email, gender, ip_address } = req.body;
+        console.log("Received body: ", req.body);
+
+        mock_database.push(req.body)
 
         res.status(200).json({
             "success": true,
